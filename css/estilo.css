@@ -1,0 +1,47 @@
+/* definindo nosso estilo do projeto... */
+
+@charset "utf8";
+
+body
+{
+    margin-top: 40px;
+    padding-top: 60px;
+}
+
+.fundofixo
+{
+    background: url('../images/background.png') no-repeat fixed ;
+    -webkit-background-size: cover;
+    background-size: cover;
+
+}
+
+#loginzada
+{
+    margin-top: 8px;
+    margin-right: 9px;
+}
+
+
+.navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+#logo-nav
+{
+    margin-top: 5px;
+}
+
+#login-cad a
+{
+    color: black;
+}
+
+#atencao
+{
+    border-radius: 10px;
+    background-color: black;
+    color: aliceblue;
+}
+
