@@ -2,6 +2,14 @@
 //Chama conexão
 include '../conn/connect.php';
 
+$listaServico = $conn -> query("select * from vw_servicos");
+$row = $listaServico -> fetch_assoc();
+
+// $linhasServicos = $linhasServicos -> num_rows;
+
+$listaProfissional = $conn -> query("select * from usuarios where nivel_id = 1");
+$rowPro = $listaProfissional -> fetch_assoc();
+
 
  
 //inicia verificação do form
