@@ -44,20 +44,13 @@ include 'conn/connect.php';
                                 </p>
 
                                 <p>
-                                    <a href="barbeiro/index.php">
-                                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                                            Barbeiro
-                                        </button>
-                                    </a>
-                                </p>
-                                <p>
                                     <a href="admin/index.php">
                                         <button type="button" class="btn btn-primary btn-lg btn-block">
-                                            Administrador
+                                            ADM/Barbeiro
                                         </button>
                                     </a>
                                 </p>
-                                   
+                 
                                 </form>
                                 <p class="text-center">
                                     <small>

@@ -53,7 +53,7 @@
                             <?php echo $rowDestaque['detalhe']?>
                             </p>
                             <p>
-                                <a href="servico_detalhes.php?id=<?php echo $row['id'];?>">
+                                <a href="cliente/agendar.php?id=<?php echo $row['id'];?>">
                                     <button id="atencao" type="button" class="btn btn-default btn-lg"> Agendar
                             
                                     </button>

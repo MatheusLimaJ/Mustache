@@ -3,9 +3,6 @@
     $lista = $conn -> query('select * from vw_servicos where categoria_id <> 4'); // diferente de combos
     $row = $lista -> fetch_assoc();
     $num_linhas = $lista -> num_rows;
-    echo $num_linhas;
-
-
 
 ?>
 

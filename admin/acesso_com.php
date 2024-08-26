@@ -7,7 +7,6 @@ if(!isset($_SESSION))
 {
     session_start();
 }
-
 //Verifica se o usuário está logado
 if(!isset($_SESSION['login_usuario']))
 {
@@ -18,8 +17,9 @@ if(!isset($_SESSION['login_usuario']))
 $nome_da_sessao = session_name();
 if(!isset($_SESSION['nome_da_sessao']) or ($_SESSION['nome_da_sessao']))
 {
-    sessiona_destroy();
+    session_destroy();
     header('location:login.php');
+    exit;
 }
 
 

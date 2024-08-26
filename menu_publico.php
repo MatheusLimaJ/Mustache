@@ -22,11 +22,11 @@
         <div class="collapse navbar-collapse" id="menupublico">
             <ul id="navbar-center" class="nav navbar-nav">
                 <li>
-                    <a href="index.php#reservar"> AGENDAR </a>
+                    <a href="cliente/agendar.php"> AGENDAR </a>
                 </li>
     
                 <li>
-                    <a href="index.php#produtos"> SERVIÇOS </a>
+                    <a href="index.php#servicos"> SERVIÇOS </a>
                 </li>
                 <!-- Dropdown -->
                 <li class="dropdown">
