@@ -30,6 +30,7 @@ if($_POST)
     else
     {
         header("Location: invasor.php");
+        exit();
     }
 }
 

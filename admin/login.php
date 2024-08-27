@@ -22,7 +22,7 @@ if($_POST)
     {
         $_SESSION['usuario_id'] = $rowLogin['id'];
         $_SESSION['login_usuario'] = $login;
-        $_SESSION['nivel_usuario'] = $rowLogin['nivel'];
+        $_SESSION['nivel_usuario'] = $rowLogin['nivel_id'];
         $_SESSION['nome_da_sessao'] = session_name();
         if ($rowLogin['nivel_id'] == '2')
         {
