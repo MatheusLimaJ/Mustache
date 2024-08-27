@@ -1,27 +1,66 @@
 <?php
+
 //Chama conexão
+include 'acesso_com.php';
 include '../conn/connect.php';
+
 
 $listaServico = $conn -> query("select * from vw_servicos");
 $row = $listaServico -> fetch_assoc();
 
-// $linhasServicos = $linhasServicos -> num_rows;
 
-$listaProfissional = $conn -> query("select * from usuarios where nivel_id = 1");
+$listaProfissional = $conn -> query("select * from profissionais where disponibilidade = 'S' and ativo = 1");
 $rowPro = $listaProfissional -> fetch_assoc();
 
+$cliente_id = $_SESSION['cliente_id'];
 
- 
-//inicia verificação do form
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // randi
-   
-    //dados dos formularios
 
-    // fecha conexão
-    $stmt->close();
-    $conn->close();
+
+if ($_POST)
+{
+    $cliente_id = $_SESSION['cliente_id'];
+    $data = $_POST['data'];
+    $horario = $_POST['horario'];
+    $servico = $_POST['servico_id'];
+    $profissional = $_POST['profissional_id'];
+
+    // criar a soma da hora de inicio com a hora do serviço
+    $servicoHora = $conn -> query("select * from servicos where id = " . $servico);
+    $rowHora = $servicoHora -> fetch_assoc();
+
+    $hora_termino = $rowHora['duracao_estimada'];
+
+    // Converta as horas para timestamps
+    $timestamp1 = strtotime($horario);
+    $timestamp2 = strtotime($hora_termino);
+
+    // Some os timestamps
+    $soma = $timestamp1 + ($timestamp2 - strtotime('00:00'));
+
+    // Converta o timestamp resultante de volta para o formato de hora
+    $hora_termino = date('H:i:s', $soma);
+
+
+
+    $insert = "INSERT INTO agendamentos
+    (cliente_id, profissional_id, servico_id, status, data, hora_inicio, hora_termino, 
+    data_criacao) values('$cliente_id', '$profissional', '$servico', 'CON', '$data', '$horario', '$horario', NOW())";
+    if($conn->query($insert))
+    {
+        echo "agendamento inserido com sucesso!";
+    }
+    else
+    {
+        echo "Erro ao inseri pedido: " . $conn->error;
+    }
+
 }
+
+else
+{
+    echo "ID do cliente não está definido.";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -53,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </h2>
             <div class="thumbnail">
                 <div class="alert alert-dark " role="alert">
-                    <form action="cadReserva.php" method="post"
+                    <form action="agendar.php" method="post"
                     name="form_insere" enctype="multipart/form-data"
                     id="form_insere">
  
@@ -125,20 +164,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                        <br>
  
                         <label for="servico">Serviço:</label>    
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
-                            </span>
-                            <input type="number" name="servico" id="servico" class="form-control" placeholder="" maxlength="1" required>
+                        <div class="form-group">
+                        <select id="servico_id" name="servico_id" class="form-control" required>
+                            <?php do{?>
+                                <option value="<?php echo $row['id'] ?>"> <?php echo $row['nome']?></option>
+                            <?php } while($row = $listaServico -> fetch_assoc())?>
+                        </select>
                         </div>  
                         <br>
                
                         <label for="profissional">Profissional:</label>    
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
-                            </span>
-                            <input type="number" name="profissional" id="profissional" class="form-control" placeholder="Escolha o seu profissional" maxlength="1" required>
+                        <div class="form-group">
+                        <select id="profissional_id" name="profissional_id" class="form-control" required>
+                            <?php do{?>
+                                <option value="<?php echo $rowPro['id'] ?>"> <?php echo $rowPro['nome']?></option>
+                            <?php } while($rowPrp = $listaProfissional -> fetch_assoc())?>
+                        </select>
                         </div>  
                         <br>
  
