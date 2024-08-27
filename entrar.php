@@ -16,7 +16,7 @@ include 'conn/connect.php';
     <!-- Link para CSS específico -->
     <link rel="stylesheet" href="css/estilo.css" type="text/css">
    
-    <title>Chuleta Quente - Login</title>
+    <title>Mustache - Entrar</title>
 </head>
  
 <body>
