@@ -84,7 +84,7 @@ $rows = $lista -> num_rows;
 
                             <td>
                                 <a 
-                                    href="comanda.php?id= <?php echo $row['id'] ?>"
+                                    href="atendimento_comanda.php?id= <?php echo $rowAgenda['id'] ?>"
                                     role="button" 
                                     class="btn btn-success btn-block btn-xs">
 
