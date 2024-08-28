@@ -23,11 +23,16 @@
     <a name="home"></a>
 
     <main class="container">
+        <?php include 'carousel.php'?>
+
         <!-- area de serviços -->
         <?php include 'servicos.php'?>
 
         <!-- area combos -->
         <?php include 'servicos_combo.php'?>
+
+        <!-- rodapé -->
+        <?php include 'rodape.php'?>
     
     </main>
 

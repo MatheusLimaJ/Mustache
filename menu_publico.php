@@ -53,7 +53,7 @@
                 </li>
 
                 <!-- início formulario de busca  -->
-                <form action="produtos_busca.php" method="get" name="form-busca"
+                <form action="servicos_buscar.php" method="get" name="form-busca"
                     id="form-busca" class="navbar-form navbar-left" role="search">
                         <div class="input-group">
                             <input type="search" name="buscar" id="buscar" size="9" class="form-control"
