@@ -1,6 +1,6 @@
 <?php 
 $host = "localhost";
-$database = "mustachedb01";
+$database = "mustachedb02";
 $user = "root";
 $password = "";
 $charset = "utf8";

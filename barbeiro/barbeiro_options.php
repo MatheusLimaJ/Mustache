@@ -20,14 +20,14 @@
  
             <div class="btn-group btn-group-justified" role="group">
                 <div class="btn-group">
-                    <a href="produtos_lista.php">
+                    <a href="agendamentos_lista.php">
                         <button class="btn btn-primary">
                             LISTAR
                         </button>
                     </a>
                 </div><!-- fecha btn-group -->
                 <div class="btn-group">
-                    <a href="produtos_insere.php">
+                    <a href="comanda_insere.php">
                         <button class="btn btn-primary">
                             INSERIR
                         </button>

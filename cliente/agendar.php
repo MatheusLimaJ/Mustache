@@ -178,7 +178,7 @@ else
                         <select id="profissional_id" name="profissional_id" class="form-control" required>
                             <?php do{?>
                                 <option value="<?php echo $rowPro['id'] ?>"> <?php echo $rowPro['nome']?></option>
-                            <?php } while($rowPrp = $listaProfissional -> fetch_assoc())?>
+                            <?php } while($rowPro = $listaProfissional -> fetch_assoc())?>
                         </select>
                         </div>  
                         <br>
