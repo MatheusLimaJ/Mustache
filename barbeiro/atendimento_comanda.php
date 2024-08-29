@@ -27,15 +27,45 @@ $profissional_id = $rowProfissional['id'];
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $agendamento_id = $agendamento_form;
     $descricao = $conn->real_escape_string($_POST['descAtendimento']);
-    
-    // Monta a query de inserção
-    $InsereAtendimento = "INSERT INTO atendimentos (agendamento_id, profissional_id, descricao) VALUES ($agendamento_id, $profissional_id, '$descricao')";
-    
-    // Executa a query e verifica se houve sucesso
-    if($conn->query($InsereAtendimento)) {
-        header('Location: agendamentos_lista.php');
-        exit;
-    } else {
+    $InsereAtendimento = "INSERT INTO atendimentos (agendamento_id, profissional_id, descricao) VALUES($agendamento_id, $profissional_id, '$descricao')";
+
+    if($conn->query($InsereAtendimento)) 
+    {
+        $atendimento_id = $conn->insert_id;
+        $listaAtendimento = $conn ->query("select * from atendimentos where id = $atendimento_id");
+        $rowAtendimento = $listaAtendimento -> fetch_assoc();
+        if($rowAtendimento['descricao'] == "agendado")
+        {
+            $cliente_id = $rowAgenda['cliente_id'];
+            $insereComanda = "INSERT into comandas(atendimento_id, cliente_id, status, desconto) values($atendimento_id, $cliente_id, 'A', '0')";  
+            $resultadoComanda = $conn -> query($insereComanda);
+            if($resultadoComanda)
+            {
+                $comanda_id = $conn -> insert_id;
+                $servico_id = $rowAgenda['servico_id'];
+                $listaServico = $conn ->query("select * from servicos where id = $servico_id");
+                $rowServico = $listaServico -> fetch_assoc();
+                $valor = $rowServico['valor_unit'];
+
+                $query = "INSERT into comandaservico(servico_id, comanda_id, preco, desconto) values($servico_id, $comanda_id, $valor, '0.00')";
+                if($conn->query($query))
+                {
+                    header('Location: agendamentos_lista.php');
+                    exit;
+                }
+            }
+            else
+            {
+                echo "Comanda não inserirda: " . $conn ->error;
+            }
+        }
+        else
+        {
+
+        }
+    } 
+    else 
+    {
         echo "Erro: " . $conn->error;
     }
 }
