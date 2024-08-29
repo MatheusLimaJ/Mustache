@@ -34,14 +34,10 @@
                             <span class="glyphicon glyphicon-home" aria-hidden="true">&nbsp;Home</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="index.php#destaques" class="text-danger">
-                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true">&nbsp;Destaques</span>
-                        </a>
-                    </li>
+               
                     <li >
                         <a href="index.php#produtos" class="text-danger">
-                            <span class="glyphicon glyphicon-cutlery" aria-hidden="true">&nbsp;Produtos</span>
+                            <span class="glyphicon glyphicon-scissors" aria-hidden="true">&nbsp;Serviços</span>
                         </a>
                     </li>
                     <li >
