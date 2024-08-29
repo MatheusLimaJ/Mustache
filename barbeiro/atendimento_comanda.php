@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $listaAtendimento = $conn ->query("select * from atendimentos where id = $atendimento_id");
         $rowAtendimento = $listaAtendimento -> fetch_assoc();
         if($rowAtendimento['descricao'] == "agendado")
-        {
+        { 
             $cliente_id = $rowAgenda['cliente_id'];
             $insereComanda = "INSERT into comandas(atendimento_id, cliente_id, status, desconto) values($atendimento_id, $cliente_id, 'A', '0')";  
             $resultadoComanda = $conn -> query($insereComanda);
@@ -59,17 +59,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo "Comanda não inserirda: " . $conn ->error;
             }
         }
-        else
-        {
+        else {
             $cliente_id = $rowAgenda['cliente_id'];
-            $insereComanda = "INSERT into comandas(atendimento_id, cliente_id, status, desconto) values($atendimento_id, $cliente_id, 'A', '0')";  
-            $resultadoComanda = $conn -> query($insereComanda);
-            if ($resultadoComanda)
-            {
-                $comanda_insert = $conn -> insert_id;
+            $insereComanda = "INSERT INTO comandas(atendimento_id, cliente_id, status, desconto) VALUES($atendimento_id, $cliente_id, 'A', '0')";  
+            $resultadoComanda = $conn->query($insereComanda);
+            
+            if ($resultadoComanda) {
+                $comanda_insert = $conn->insert_id;
+                // Redireciona para o próximo arquivo com o ID da comanda via GET
                 header("Location: servico_comanda.php?id=$comanda_insert");
+                exit;
             }
         }
+        
     } 
     else 
     {
