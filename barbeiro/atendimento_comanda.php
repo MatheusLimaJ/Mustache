@@ -61,7 +61,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         else
         {
-
+            $cliente_id = $rowAgenda['cliente_id'];
+            $insereComanda = "INSERT into comandas(atendimento_id, cliente_id, status, desconto) values($atendimento_id, $cliente_id, 'A', '0')";  
+            $resultadoComanda = $conn -> query($insereComanda);
+            if ($resultadoComanda)
+            {
+                $comanda_insert = $conn -> insert_id;
+                header("Location: servico_comanda.php?id=$comanda_insert");
+            }
         }
     } 
     else 

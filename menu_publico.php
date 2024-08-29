@@ -1,4 +1,11 @@
 
+<?php 
+    include "conn/connect.php";
+    $lista_tipos = $conn -> query("select * from categorias");
+    $rows_tipos = $lista_tipos -> fetch_all();
+?>
+
+
 <!-- BOOTSTRAP -->
 <!-- abre a barra de navegação -->
 
@@ -35,7 +42,10 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        
+                        <?php foreach($rows_tipos as $row){?>
+                            <li><a href="servico_categoria.php?id_tipo=<?php echo $row[0]?>"><?php echo $row[1]?> </a></li>
+
+                        <?php }?>
                     </ul>
                 </li>
                 <li>
