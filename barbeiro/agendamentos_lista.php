@@ -50,7 +50,7 @@ $rows = $lista -> num_rows;
                 <?php do{ ?>
                         <tr>
                             <td class="hidden">
-                                <?php echo $rowAgenda['id']; ?>
+                                <input type="hidden" value=" <?php echo $rowAgenda['id']; ?>  ">
                             </td>
                             <td></td>
                             <td>
