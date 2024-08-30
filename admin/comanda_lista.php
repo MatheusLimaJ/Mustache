@@ -5,7 +5,8 @@ if(!isset($_SESSION))
 }
 include '../conn/connect.php';
 
-$lista = $conn->query('SELECT * FROM vw_agendamentos WHERE status = "CON"');
+// Consulta a tabela comandas
+$lista = $conn->query('SELECT * FROM comandas where status = "A"');
 $rows = $lista->num_rows;
 
 ?>
@@ -16,54 +17,48 @@ $rows = $lista->num_rows;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamentos - Lista</title>
+    <title>Comandas - Lista</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
 
-    <?php include 'menu_barbeiro.php'?>
+    <?php include 'menu_admin.php'?>
     <main class="container">
-        <h2 class="breadcrumb alert-dark">Seus Agendamentos</h2>
+        <h2 class="breadcrumb alert-dark">Comandas</h2>
         
         <?php if ($rows > 0) { ?>
             <table class="table table-hover table-condensed tb-opacidade bg-dark">
                 <thead>
                     <th class="hidden">ID</th>
-                    <th></th>
+                    <th>ATENDIMENTO</th>
                     <th>CLIENTE</th>
-                    <th>SERVIÇO</th>
-                    <th>DATA</th>
-                    <th>INICIO</th>
-                    <th>TERMINO</th>
+                    <th>STATUS</th>
+                    <th>DESCONTO</th>
                     <th>
-                        <a href="tipos_insere.php" target="_self" class="btn btn-block btn-primary btn-xs" role="button">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            <span class="hidden-xs">ADICIONAR</span>
-                        </a>
+                        
                     </th>
                 </thead>
                 <tbody>
-                    <?php while($rowAgenda = $lista->fetch_assoc()) { ?>
+                    <?php while($rowComanda = $lista->fetch_assoc()) { ?>
+
                         <tr>
                             <td class="hidden">
-                                <input type="hidden" value="<?php echo $rowAgenda['id']; ?>">
+                                <input type="hidden" value="<?php echo $rowComanda['id']; ?>">
                             </td>
-                            <td></td>
-                            <td><?php echo $rowAgenda['cliente_nome']; ?></td>
-                            <td><?php echo $rowAgenda['servico_nome']; ?></td>
-                            <td><?php echo $rowAgenda['data']; ?></td>
-                            <td><?php echo $rowAgenda['hora_inicio']; ?></td>
-                            <td><?php echo $rowAgenda['hora_termino']; ?></td>
+                            <td><?php echo $rowComanda['atendimento_id']; ?></td>
+                            <?php 
+                                $listaCliente = $conn->query("SELECT * FROM clientes where id =" . $rowComanda['cliente_id']);
+                                $rowCliente = $listaCliente -> fetch_assoc();
+                            ?>
+                            <td><?php echo $rowCliente['nome']; ?></td>
+                            <td><?php echo $rowComanda['status']; ?></td>
+                            <td><?php echo $rowComanda['desconto']; ?></td>
                             <td>
-                                <a href="atendimento_comanda.php?id=<?php echo $rowAgenda['id']; ?>" role="button" class="btn btn-success btn-block btn-xs">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    <span class="hidden-xs">ATENDER</span>
+                                <a href="comanda_edita.php?id=<?php echo $rowComanda['id']; ?>" role="button" class="btn btn-success btn-block btn-xs">
+                                    <span class="glyphicon glyphicon-usd"></span>
+                                    <span class="hidden-xs">PAGAR </span>
                                 </a>
-                                <button data-nome="<?php echo $rowAgenda['motivo']; ?>" data-id="<?php echo $rowAgenda['id']; ?>" class="delete btn btn-xs btn-block btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    <span class="hidden-xs"> CANCELAR</span>
-                                </button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -71,7 +66,7 @@ $rows = $lista->num_rows;
             </table>
         <?php } else { ?>
             <div class="alert alert-warning" role="alert">
-                Não existem agendamentos demandados a você no momento.
+                Ainda não existem comandas
             </div>
         <?php } ?>
     </main>
@@ -85,7 +80,7 @@ $rows = $lista->num_rows;
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <div class="modal-body">
-                    Deseja mesmo excluir o tipo?
+                    Deseja mesmo excluir a comanda?
                     <h4><span class="nome text-danger"></span></h4>
                 </div>
                 <div class="modal-footer">
@@ -102,10 +97,8 @@ $rows = $lista->num_rows;
 <script src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $('.delete').on('click', function(){
-        var nome = $(this).data('nome'); //busca o nome com a descrição (data-nome)
         var id = $(this).data('id'); // busca o id (data-id)
-        $('span.nome').text(nome); // insere o nome do item na confirmação
-        $('a.delete-yes').attr('href', 'agendamento_cancela.php?id=' + id); //chama o arquivo php para excluir o produto
+        $('a.delete-yes').attr('href', 'comanda_cancela.php?id=' + id); //chama o arquivo php para excluir a comanda
         $('#modalEdit').modal('show'); // chamar o modal
     });
 </script>

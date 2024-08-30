@@ -22,9 +22,9 @@ $rows = $lista->num_rows;
 </head>
 <body>
 
-    <?php include 'menu_barbeiro.php'?>
+    <?php include 'menu_admin.php'?>
     <main class="container">
-        <h2 class="breadcrumb alert-dark">Seus Agendamentos</h2>
+        <h2 class="breadcrumb alert-dark">Agendamentos</h2>
         
         <?php if ($rows > 0) { ?>
             <table class="table table-hover table-condensed tb-opacidade bg-dark">
@@ -71,7 +71,7 @@ $rows = $lista->num_rows;
             </table>
         <?php } else { ?>
             <div class="alert alert-warning" role="alert">
-                Não existem agendamentos demandados a você no momento.
+                Ainda não existem agendamentos
             </div>
         <?php } ?>
     </main>

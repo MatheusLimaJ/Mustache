@@ -11,6 +11,12 @@ if (isset($_GET['id'])) {
     die("ID da comanda não fornecido.");
 }
 
+$listaConsulta = $conn -> query("select * from vw_operacao where comanda_id = $comanda_id");
+$rowConsulta = $listaConsulta -> fetch_assoc();
+$servicoAgendado = $rowConsulta['servico_id'];
+
+$queryAgenda = $conn->query("INSERT INTO comandaservico(servico_id, comanda_id, preco, desconto) VALUES ($servicoAgendado, $comanda_id, '0.00', '0.00')");
+
 $listaServico = $conn->query("SELECT * FROM servicos");
 $rowServico = $listaServico->fetch_assoc();
 
@@ -21,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $servico_id = $_POST['servico_id'];
         
         // Realiza o INSERT na tabela comandaservico
-        $query = $conn->query("INSERT INTO comandaservico(servico_id, comanda_id, preco, desconto) VALUES ($servico_id, $comanda_id, '0.00', '0.00')");
+        $queryAcrescimo = $conn->query("INSERT INTO comandaservico(servico_id, comanda_id, preco, desconto) VALUES ($servico_id, $comanda_id, '0.00', '0.00')");
         
-        if ($query) {
+        if ($queryAcrescimo) {
             header('Location: agendamentos_lista.php');
             exit;
         } else {

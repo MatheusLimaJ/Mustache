@@ -15,9 +15,10 @@ if(!isset($_SESSION))
     <title>Área Administrativa - Mustache</title>
 </head>
 <body >
-
+    <?php include 'menu_admin.php'; ?>
+    
     <div class="container">
-        <h1>OLá ADMINISTRADOR</h1>
+        <?php include 'adm_option.php'; ?>
     </div>
 </body>
 </html>

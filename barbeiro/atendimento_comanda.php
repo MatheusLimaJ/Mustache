@@ -66,6 +66,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             if ($resultadoComanda) {
                 $comanda_insert = $conn->insert_id;
+                $atualizaAgenda = "update agendamentos set status = 'FIN' where $agendamento_id";  
+                $finalizaAgenda = $conn->query($atualizaAgenda);
+                
                 // Redireciona para o próximo arquivo com o ID da comanda via GET
                 header("Location: servico_comanda.php?id=$comanda_insert");
                 exit;
