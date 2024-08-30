@@ -28,7 +28,7 @@ if($num_linhas > 0){?>
         </h2>
     </div>
 
-    <div class="row">
+    <div id="combos" class="row">
         <?php do{ ?>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">

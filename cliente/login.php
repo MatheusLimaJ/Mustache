@@ -25,7 +25,7 @@ if($_POST)
         $_SESSION['login_cliente'] = $login;
         $_SESSION['nome_da_sessao'] = session_name();
         
-        header("Location: index.php?cliente=" . $login);
+        header("Location: ../index.php");
         exit();
     }
     else

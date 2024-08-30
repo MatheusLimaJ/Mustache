@@ -47,7 +47,8 @@ if ($_POST)
     data_criacao) values('$cliente_id', '$profissional', '$servico', 'CON', '$data', '$horario', '$horario', NOW())";
     if($conn->query($insert))
     {
-        echo "agendamento inserido com sucesso!";
+        header('location: confirmacao.php');
+        exit;
     }
     else
     {
@@ -56,10 +57,6 @@ if ($_POST)
 
 }
 
-else
-{
-    echo "ID do cliente não está definido.";
-}
 
 ?>
 <!DOCTYPE html>
